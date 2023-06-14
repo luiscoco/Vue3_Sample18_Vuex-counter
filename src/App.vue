@@ -1,18 +1,31 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <div class="counter">
+    {{ $store.state.counter }}
+  </div>
+  <div class="buttons">
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+  </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
+<script>
+import { mapState } from "vuex";
 
-export default defineComponent({
+export default {
   name: "App",
-  components: {
-    HelloWorld,
+  methods: {
+    increment() {
+      this.$store.commit("increment");
+    },
+    decrement() {
+      this.$store.commit("decrement");
+    },
   },
-});
+  computed: {
+    ...mapState(["counter"]),
+  },
+};
 </script>
 
 <style>
